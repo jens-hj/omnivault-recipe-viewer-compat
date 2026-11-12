@@ -1,0 +1,9 @@
+{
+	"required": true,
+	"package": "dev.jensh.omnivaultrecipeviewer.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"client": ["ContainerScreenAccessor", "TerminalScreenAccessor"],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

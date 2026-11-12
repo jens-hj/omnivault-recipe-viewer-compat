@@ -1,0 +1,21 @@
+plugins {
+	id 'java-library'
+	id 'net.neoforged.moddev' version "${moddev_version}"
+}
+
+// Loader-neutral code: vanilla Minecraft, OmniVault's common classes and the recipe viewers' common APIs.
+neoForge { neoFormVersion = project.neoform_version }
+java { toolchain.languageVersion = JavaLanguageVersion.of(25) }
+
+dependencies {
+	compileOnly 'net.fabricmc:sponge-mixin:0.17.5+mixin.0.8.7'
+	compileOnly "maven.modrinth:omnivault:${project.omnivault_fabric_version}"
+	compileOnly "maven.modrinth:rei:${project.rei_fabric_version}"
+	compileOnly "maven.modrinth:architectury-api:${project.architectury_fabric_version}"
+	compileOnly "me.shedaniel.cloth:basic-math:${project.basic_math_version}"
+	compileOnly "maven.modrinth:jei:${project.jei_fabric_version}"
+}
+
+tasks.matching { it.name == 'downloadAssets' }.configureEach {
+	javaExecutable = javaToolchains.launcherFor { languageVersion = JavaLanguageVersion.of(25) }.map { it.executablePath.asFile.absolutePath }
+}

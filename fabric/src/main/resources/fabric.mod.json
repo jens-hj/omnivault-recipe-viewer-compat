@@ -1,0 +1,30 @@
+{
+	"schemaVersion": 1,
+	"id": "omnivault_recipe_viewer_compat",
+	"version": "${version}",
+	"name": "OmniVault Recipe Viewer Compat",
+	"description": "Makes OmniVault terminals work with recipe viewers: move recipes from REI into the crafting and pattern terminals, and look up items straight from the network grid in REI and JEI.",
+	"authors": ["jens-hj"],
+	"contact": {
+		"homepage": "https://modrinth.com/mod/omnivault-recipe-viewer-compat",
+		"sources": "https://github.com/jens-hj/omnivault-recipe-viewer-compat",
+		"issues": "https://github.com/jens-hj/omnivault-recipe-viewer-compat/issues"
+	},
+	"license": "MIT",
+	"icon": "assets/omnivault_recipe_viewer_compat/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"rei_client": ["dev.jensh.omnivaultrecipeviewer.rei.OmniVaultReiPlugin"],
+		"jei_mod_plugin": ["dev.jensh.omnivaultrecipeviewer.jei.OmniVaultJeiExtrasPlugin"]
+	},
+	"mixins": ["omnivault_recipe_viewer_compat.mixins.json"],
+	"depends": {
+		"fabricloader": ">=0.20.1",
+		"minecraft": "~26.3",
+		"omnivault": ">=2.0.4"
+	},
+	"suggests": {
+		"roughlyenoughitems": "*",
+		"jei": "*"
+	}
+}
