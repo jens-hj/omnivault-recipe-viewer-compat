@@ -114,14 +114,21 @@ modrinth {
 tasks.named("modrinth") { notCompatibleWithConfigurationCache("Minotaur uses Task.project") }
 tasks.named("modrinthSyncBody") { notCompatibleWithConfigurationCache("Minotaur uses Task.project") }
 
-// Mute the game during client gametests and tell the test which viewer is loaded.
-def gameTestOptions = layout.projectDirectory.file("build/run/clientGameTest/options.txt")
+// Every dev launch is silent and skips the first-run screens, so tests and smoke runs stay out of the way.
+def quietOptions = { File dir ->
+	def options = new File(dir, 'options.txt')
+	dir.mkdirs()
+	def keep = options.exists() ? options.readLines().findAll {
+		!it.startsWith('soundCategory_') && !it.startsWith('onboardAccessibility:') && !it.startsWith('narrator:') && !it.startsWith('pauseOnLostFocus:')
+	} : []
+	options.text = (keep + ['soundCategory_master:0.0', 'soundCategory_music:0.0', 'onboardAccessibility:false', 'narrator:0', 'pauseOnLostFocus:false']).join('\n') + '\n'
+}
+def gameTestRunDirectory = file('build/run/clientGameTest')
+def clientRunDirectory = file('run')
 tasks.named("runClientGameTest") {
 	systemProperty 'omnivault_recipe_viewer_compat.viewer', viewer
-	doFirst {
-		def options = gameTestOptions.asFile
-		options.parentFile.mkdirs()
-		def lines = options.exists() ? options.readLines().findAll { !it.startsWith("soundCategory_master:") } : []
-		options.text = (lines + "soundCategory_master:0.0").join("\n") + "\n"
-	}
+	doFirst { quietOptions(gameTestRunDirectory) }
+}
+tasks.named("runClient") {
+	doFirst { quietOptions(clientRunDirectory) }
 }

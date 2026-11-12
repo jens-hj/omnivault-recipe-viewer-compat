@@ -78,3 +78,16 @@ modrinth {
 }
 tasks.named('modrinth') { notCompatibleWithConfigurationCache('Minotaur uses Task.project') }
 tasks.named('modrinthSyncBody') { notCompatibleWithConfigurationCache('Minotaur uses Task.project') }
+
+// Every dev launch is silent and skips the first-run screens, so smoke runs stay out of the way.
+def clientRunDirectory = file('run')
+tasks.named('runClient') {
+	doFirst {
+		def options = new File(clientRunDirectory, 'options.txt')
+		clientRunDirectory.mkdirs()
+		def keep = options.exists() ? options.readLines().findAll {
+			!it.startsWith('soundCategory_') && !it.startsWith('onboardAccessibility:') && !it.startsWith('narrator:') && !it.startsWith('pauseOnLostFocus:')
+		} : []
+		options.text = (keep + ['soundCategory_master:0.0', 'soundCategory_music:0.0', 'onboardAccessibility:false', 'narrator:0', 'pauseOnLostFocus:false']).join('\n') + '\n'
+	}
+}
