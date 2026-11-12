@@ -119,7 +119,7 @@ def gameTestOptions = layout.projectDirectory.file("build/run/clientGameTest/opt
 tasks.named("runClientGameTest") {
 	systemProperty 'omnivault_recipe_viewer_compat.viewer', viewer
 	doFirst {
-		def options = gameTestOptions.get().asFile
+		def options = gameTestOptions.asFile
 		options.parentFile.mkdirs()
 		def lines = options.exists() ? options.readLines().findAll { !it.startsWith("soundCategory_master:") } : []
 		options.text = (lines + "soundCategory_master:0.0").join("\n") + "\n"

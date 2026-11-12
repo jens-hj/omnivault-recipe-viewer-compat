@@ -38,7 +38,7 @@ final class JeiChecks {
 			IScreenHelper screens = runtime.getScreenHelper();
 			int[] cell = RecipeViewerClientGameTest.firstCell(mc);
 			check(screens.getClickableIngredientUnderMouse(mc.gui.screen(), cell[0], cell[1])
-					.anyMatch(clickable -> clickable.getIngredient() instanceof ItemStack stack && stack.is(Items.OAK_PLANKS)),
+					.anyMatch(clickable -> clickable.getTypedIngredient().getIngredient() instanceof ItemStack stack && stack.is(Items.OAK_PLANKS)),
 					"JEI should see the planks under the mouse in the network grid");
 			int[] button = RecipeViewerClientGameTest.sideButton(mc);
 			check(screens.getGuiExclusionAreas(mc.gui.screen()).anyMatch(area -> area.contains(button[0], button[1])),
