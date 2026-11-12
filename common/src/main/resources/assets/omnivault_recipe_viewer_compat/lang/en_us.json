@@ -1,0 +1,5 @@
+{
+	"gui.omnivault_recipe_viewer_compat.missing": "Missing items in the network and your inventory",
+	"gui.omnivault_recipe_viewer_compat.pattern_unsupported": "This recipe has no items to encode",
+	"gui.omnivault_recipe_viewer_compat.pattern_too_big": "This recipe is too big for a pattern"
+}
