@@ -115,7 +115,7 @@ tasks.named("modrinth") { notCompatibleWithConfigurationCache("Minotaur uses Tas
 tasks.named("modrinthSyncBody") { notCompatibleWithConfigurationCache("Minotaur uses Task.project") }
 
 // Mute the game during client gametests and tell the test which viewer is loaded.
-def gameTestOptions = layout.buildDirectory.file("run/clientGameTest/options.txt")
+def gameTestOptions = layout.projectDirectory.file("build/run/clientGameTest/options.txt")
 tasks.named("runClientGameTest") {
 	systemProperty 'omnivault_recipe_viewer_compat.viewer', viewer
 	doFirst {

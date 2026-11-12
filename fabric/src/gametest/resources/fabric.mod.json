@@ -1,0 +1,18 @@
+{
+	"schemaVersion": 1,
+	"id": "omnivault_recipe_viewer_compat_test",
+	"version": "${version}",
+	"name": "OmniVault Recipe Viewer Compat Tests",
+	"environment": "*",
+	"entrypoints": {
+		"fabric-client-gametest": [
+			"dev.jensh.omnivaultrecipeviewer.test.RecipeViewerClientGameTest"
+		],
+		"jei_mod_plugin": [
+			"dev.jensh.omnivaultrecipeviewer.test.JeiChecks$RuntimeGrabber"
+		]
+	},
+	"depends": {
+		"omnivault_recipe_viewer_compat": "*"
+	}
+}
